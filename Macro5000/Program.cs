@@ -35,7 +35,7 @@ namespace Macro5000
             }
             Process process = new Process();
             process.StartInfo.FileName = "C:\\Program Files\\Luxriot Digital Video Recorder\\CameraStatusReport.exe";
-            process.StartInfo.Arguments = "\"C:\\Users\\Jon\\Desktop\\CameraStatus.lxd\" -check";
+            process.StartInfo.Arguments = "\"C:\\Documents and Settings\\administrator.SLEEPINN\\Desktop\\CameraStatus.lxd\" -check";
             process.Start();
 
             //make sure the window has focus
@@ -49,6 +49,9 @@ namespace Macro5000
             //shift tab would be something like
             System.Threading.Thread.Sleep(2000);
             SendKeys.SendWait("+{TAB}");
+            SendKeys.SendWait("{ENTER}");
+            for(int i=0; i<1800; i++)
+                System.Threading.Thread.Sleep(1000);
             SendKeys.SendWait("{ENTER}");
         }
 
