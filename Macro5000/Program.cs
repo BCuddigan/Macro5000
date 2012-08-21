@@ -27,21 +27,36 @@ namespace Macro5000
 
         static void Main(string[] args)
         {
+            string tempArgument = "\"C:\\Documents and Settings\\administrator.SLEEPINN\\Desktop\\CameraStatus.lxd\"";
+
+            for (int i = 0; i < args.Length; i++)
             {
-                foreach (Process proc in Process.GetProcessesByName("camerastatusreport"))
+                if (args[i] == "/lxd")
                 {
-                    proc.Kill();
+                    if (i + 1 < args.Length)
+                        tempArgument = args[i + 1];
                 }
             }
+
+            foreach (Process proc in Process.GetProcessesByName("camerastatusreport"))
+            {
+                proc.Kill();
+            }
+
+            foreach (Process proc in Process.GetProcessesByName("iexplore"))
+            {
+                proc.Kill();
+            }
+
             Process process = new Process();
             process.StartInfo.FileName = "C:\\Program Files\\Luxriot Digital Video Recorder\\CameraStatusReport.exe";
-            process.StartInfo.Arguments = "\"C:\\Documents and Settings\\administrator.SLEEPINN\\Desktop\\CameraStatus.lxd\" -check";
+            process.StartInfo.Arguments = tempArgument + " -check";
             process.Start();
 
             //make sure the window has focus
             SetForegroundWindow(process.MainWindowHandle);
 
-            //wait 1 second (1000 milliseconds)
+            //wait 3 second (3000 milliseconds)
             System.Threading.Thread.Sleep(3000);
 
             SendKeys.SendWait("%c");
@@ -50,7 +65,7 @@ namespace Macro5000
             System.Threading.Thread.Sleep(2000);
             SendKeys.SendWait("+{TAB}");
             SendKeys.SendWait("{ENTER}");
-            for(int i=0; i<1800; i++)
+            for(int i=0; i<900; i++)
                 System.Threading.Thread.Sleep(1000);
             SendKeys.SendWait("{ENTER}");
         }
