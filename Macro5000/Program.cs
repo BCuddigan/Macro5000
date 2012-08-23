@@ -68,6 +68,12 @@ namespace Macro5000
             for(int i=0; i<900; i++)
                 System.Threading.Thread.Sleep(1000);
             SendKeys.SendWait("{ENTER}");
+            System.Threading.Thread.Sleep(10000);
+
+            foreach (Process proc in Process.GetProcessesByName("camerastatusreport"))
+            {
+                proc.Kill();
+            }
         }
 
     }
